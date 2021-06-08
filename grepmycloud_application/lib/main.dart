@@ -13,22 +13,44 @@ class GrepMyCloud extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),
-      home: MyObjectsPage(title: 'User Objects'),
+      home: MyObjectsPage(
+        title: 'User Objects',
+        objectCount: 0,
+      ),
     );
   }
 }
 
 class MyObjectsPage extends StatefulWidget {
-  MyObjectsPage({Key? key, required this.title}) : super(key: key);
+  MyObjectsPage({Key? key, required this.title, required this.objectCount})
+      : super(key: key);
 
   final String title;
+  int objectCount;
 
   @override
   _MyObjectsPageState createState() => _MyObjectsPageState();
 }
 
+class MyObject extends StatelessWidget {
+  final int index;
+
+  const MyObject(this.index, {Key? key}) : super(key: key);
+}
+
 class _MyObjectsPageState extends State<MyObjectsPage> {
-  int _count = 0;
+  int get objectCount {
+    return widget.objectCount;
+  }
+
+  set objectCount(int count) {
+    widget.objectCount = count;
+  }
+
+  void incrementObjectCount() {
+    objectCount = objectCount + 1;
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
@@ -45,7 +67,7 @@ class _MyObjectsPageState extends State<MyObjectsPage> {
       ),
       body: _buildObjectSilversList(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => _count++),
+        onPressed: () => setState(() => incrementObjectCount()),
         tooltip: 'Object Creator',
         child: const Icon(Icons.add),
       ),
@@ -83,10 +105,10 @@ class _MyObjectsPageState extends State<MyObjectsPage> {
             return Container(
               alignment: Alignment.center,
               color: Colors.teal[100 * (index % 9)],
-              child: Text('Link $index'),
+              child: Text('My Object $index'),
             );
           },
-          childCount: 20,
+          childCount: objectCount,
         ),
       ),
     ]);
