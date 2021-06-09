@@ -19,11 +19,7 @@ class BookshelfPage extends StatelessWidget {
             //     crossAxisSpacing: 10.0,
             //     childAspectRatio: 4.0),
             delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) => _MyShelf(
-                      books,
-                      EdgeInsets.all(8),
-                      new Text('|'),
-                    )),
+                (BuildContext context, int index) => _MyBook(index)),
           ),
         ],
       ),
@@ -43,17 +39,12 @@ class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-        pinned: true,
-        expandedHeight: 150.0,
-        flexibleSpace: const FlexibleSpaceBar(
-          title: Text('Bookshelf'),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.menu_book_outlined),
-            onPressed: () => Navigator.pushNamed(context, '/myLinks'),
-          ),
-        ]);
+      pinned: true,
+      expandedHeight: 150.0,
+      flexibleSpace: const FlexibleSpaceBar(
+        title: Text('Bookshelf'),
+      ),
+    );
   }
 }
 
@@ -173,9 +164,9 @@ class _MyBook extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       IconButton(
-          icon: const Icon(Icons.link),
+          icon: const Icon(Icons.book),
           tooltip: 'Opens: $index',
-          onPressed: () {}),
+          onPressed: () => Navigator.pushNamed(context, '/myLinks')),
       Text('$index')
     ]);
   }
