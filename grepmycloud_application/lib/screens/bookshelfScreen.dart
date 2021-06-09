@@ -28,18 +28,17 @@ class _MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      pinned: true,
-      expandedHeight: 150.0,
-      flexibleSpace: const FlexibleSpaceBar(
-        title: Text('Bookshelf'),
-      ),
-      //actions: [
-      //  IconButton(
-      //    icon: const Icon(Icons.menu_book_outlined),
-      //    onPressed: () => Navigator.pushNamed(context, '/myLinks'),
-      //  ),
-      //]
-    );
+        pinned: true,
+        expandedHeight: 150.0,
+        flexibleSpace: const FlexibleSpaceBar(
+          title: Text('Bookshelf'),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu_book_outlined),
+            onPressed: () => Navigator.pushNamed(context, '/myLinks'),
+          ),
+        ]);
   }
 }
 

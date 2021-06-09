@@ -19,7 +19,7 @@ class GrepMyCloud extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => WelcomePage(), //TODO make this welcome
-        '/myLinks': (context) => MyLinksPage(),
+        '/myLinks': (context) => MyPages(),
         '/bookshelf': (context) =>
             BookshelfPage(), //TODO make this the bookshelf
       },

@@ -1,6 +1,50 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-class MyLinksPage extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
+
+class MyPages extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        children: [
+          MyLinksPage(
+            title: 'page 1',
+            initialObjectCount: 0,
+          ),
+          MyLinksPage(
+            title: 'page 2',
+            initialObjectCount: 0,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyLinksPage extends StatefulWidget {
+  MyLinksPage({Key? key, required this.title, required this.initialObjectCount})
+      : super(key: key);
+  final String title;
+  final int initialObjectCount;
+
+  @override
+  MyLinksPageState createState() => MyLinksPageState();
+}
+
+class MyLinksPageState extends State<MyLinksPage> {
+  int allObjectCount = 0;
+  int get initialObjectCount {
+    return widget.initialObjectCount;
+  }
+
+  int incrementObjectCount() {
+    allObjectCount = allObjectCount + initialObjectCount + 1;
+    return allObjectCount;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,10 +58,17 @@ class MyLinksPage extends StatelessWidget {
                 mainAxisSpacing: 10.0,
                 crossAxisSpacing: 10.0,
                 childAspectRatio: 4.0),
-            delegate:
-                SliverChildBuilderDelegate((context, index) => _MyLink(index)),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => _MyLink('https://google.com', 'Google'),
+              childCount: allObjectCount,
+            ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() => incrementObjectCount()),
+        tooltip: 'Object Creator',
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -43,15 +94,29 @@ class _MyAppBar extends StatelessWidget {
 }
 
 class _MyLink extends StatelessWidget {
-  final int index;
+  final String link;
+  final String title;
+  const _MyLink(this.link, this.title, {Key? key}) : super(key: key);
 
-  const _MyLink(this.index, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      color: Colors.teal[100 * (index % 9)],
-      child: Text('My Object $index'),
-    );
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      IconButton(
+          icon: const Icon(Icons.link),
+          tooltip: 'Opens: $link',
+          onPressed: () {
+            const url = 'https://google.com';
+            launchURL(url);
+          }),
+      Text('$title')
+    ]);
+  }
+
+  launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceWebView: true);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }
