@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grepmycloud_application/screens/bookshelfScreen.dart';
+import 'package:grepmycloud_application/screens/createLinkScreen.dart';
 import 'package:grepmycloud_application/screens/linksScreen.dart';
 import 'package:grepmycloud_application/screens/welcomeScreen.dart';
 
@@ -22,6 +23,7 @@ class GrepMyCloud extends StatelessWidget {
         '/myLinks': (context) => MyPages(),
         '/bookshelf': (context) =>
             BookshelfPage(), //TODO make this the bookshelf
+        '/createLink': (context) => MyCustomForm(),
       },
     );
   }

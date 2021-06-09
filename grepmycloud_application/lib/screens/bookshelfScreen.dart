@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 class BookshelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<Widget> books = <Widget>[];
+    books.add(_MyBook(1));
+    books.add(_MyBook(2));
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -16,11 +19,23 @@ class BookshelfPage extends StatelessWidget {
             //     crossAxisSpacing: 10.0,
             //     childAspectRatio: 4.0),
             delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) => _MyShelf()),
+                (BuildContext context, int index) => _MyShelf(
+                      books,
+                      EdgeInsets.all(8),
+                      new Text('|'),
+                    )),
           ),
         ],
       ),
     );
+  }
+
+  Widget _book() {
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      IconButton(
+          icon: const Icon(Icons.link), tooltip: 'Book', onPressed: () {}),
+      Text('Book')
+    ]);
   }
 }
 
@@ -42,7 +57,7 @@ class _MyAppBar extends StatelessWidget {
   }
 }
 
-class _MyShelf extends StatelessWidget {
+class _MyShelfOld extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +67,8 @@ class _MyShelf extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                  (context, index) => _MyBook(index)),
+                  (context, index) => _MyBook(index),
+                  childCount: 20),
             ),
           ),
           SliverToBoxAdapter(
@@ -76,6 +92,53 @@ class _MyShelf extends StatelessWidget {
       ),
     );
   }
+}
+
+class _MyShelf extends StatelessWidget {
+  final List<Widget> children;
+  final EdgeInsets listPadding;
+  final Widget divider;
+
+  const _MyShelf(@required this.children, this.listPadding, this.divider,
+      {Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext) {
+    return Text("TESTTT");
+  }
+}
+
+//This is a horizontal Sliver List that takes in an array
+class _MyShelfNew extends StatelessWidget {
+  final List<Widget> children;
+  final EdgeInsets listPadding;
+  final Widget divider;
+
+  const _MyShelfNew(@required this.children, this.listPadding, this.divider,
+      {Key? key})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: listPadding,
+          child: Row(children: [
+            for (var i = 0; i < children.length; i++) ...[
+              children[i],
+              if (i != children.length - 1) addDivider(),
+            ],
+          ]),
+        ),
+      ),
+    );
+  }
+
+  Widget addDivider() =>
+      divider ?? Padding(padding: const EdgeInsets.symmetric(horizontal: 8));
 }
 
 //class _MyBook extends StatelessWidget {
@@ -108,10 +171,12 @@ class _MyBook extends StatelessWidget {
   const _MyBook(this.index, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      color: Colors.teal[100 * (index % 9)],
-      child: Text('My Object $index'),
-    );
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      IconButton(
+          icon: const Icon(Icons.link),
+          tooltip: 'Opens: $index',
+          onPressed: () {}),
+      Text('$index')
+    ]);
   }
 }

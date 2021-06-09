@@ -11,11 +11,11 @@ class MyPages extends StatelessWidget {
       body: PageView(
         children: [
           MyLinksPage(
-            title: 'page 1',
+            title: 'Grep My Cloud',
             initialObjectCount: 0,
           ),
           MyLinksPage(
-            title: 'page 2',
+            title: 'Flutter Refs',
             initialObjectCount: 0,
           ),
         ],
@@ -35,9 +35,15 @@ class MyLinksPage extends StatefulWidget {
 }
 
 class MyLinksPageState extends State<MyLinksPage> {
+  String link = '';
+  String linkTitle = 'Unnamed';
   int allObjectCount = 0;
   int get initialObjectCount {
     return widget.initialObjectCount;
+  }
+
+  String get title {
+    return widget.title;
   }
 
   int incrementObjectCount() {
@@ -50,7 +56,7 @@ class MyLinksPageState extends State<MyLinksPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          _MyAppBar(),
+          _MyAppBar('$title'),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
           SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -59,14 +65,16 @@ class MyLinksPageState extends State<MyLinksPage> {
                 crossAxisSpacing: 10.0,
                 childAspectRatio: 4.0),
             delegate: SliverChildBuilderDelegate(
-              (context, index) => _MyLink('https://google.com', 'Google'),
+              (context, index) => _MyLink(
+                  'https://docs.google.com/document/d/1lB0U8TbGVYHeC3C3FcF2hzdkBvgaMsT7_yBpm6Lw_Nk/edit?usp=sharing',
+                  'Documentation'),
               childCount: allObjectCount,
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => setState(() => incrementObjectCount()),
+        onPressed: () => Navigator.pushNamed(context, '/createLink'),
         tooltip: 'Object Creator',
         child: const Icon(Icons.add),
       ),
@@ -75,20 +83,14 @@ class MyLinksPageState extends State<MyLinksPage> {
 }
 
 class _MyAppBar extends StatelessWidget {
+  final String title;
+  const _MyAppBar(this.title, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
       expandedHeight: 150.0,
-      flexibleSpace: const FlexibleSpaceBar(
-        title: Text('My Objects'),
-      ),
-      //actions: [
-      //  IconButton(
-      //    icon: const Icon(Icons.menu_book_outlined),
-      //    onPressed: () => Navigator.pushNamed(context, '/bookshelf'),
-      //  ),
-      //],
+      title: Text('$title'),
     );
   }
 }
@@ -105,8 +107,7 @@ class _MyLink extends StatelessWidget {
           icon: const Icon(Icons.link),
           tooltip: 'Opens: $link',
           onPressed: () {
-            const url = 'https://google.com';
-            launchURL(url);
+            launchURL(link);
           }),
       Text('$title')
     ]);
