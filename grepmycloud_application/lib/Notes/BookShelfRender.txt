@@ -1,0 +1,6 @@
+            delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) => _MyShelf(
+                      books,
+                      EdgeInsets.all(8),
+                      new Text('|'),
+                    ))
