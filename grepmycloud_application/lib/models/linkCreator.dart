@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 class LinkCreatorModel {
-  static List<String> linkNames = [
-    'link 1',
-    'link 2',
-    'link 3',
-  ];
+  static List<String> linkNames = <String>[];
+
   Link getById(int id) => Link(id, linkNames[id % linkNames.length]);
 
   Link getByPostition(int position) {
     return getById(position);
+  }
+
+  void add(String name) {
+    linkNames.add(name);
+  }
+
+  void remove(String name) {
+    linkNames.remove(name);
   }
 }
 

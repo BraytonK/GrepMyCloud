@@ -7,10 +7,10 @@ class SignedOutPortal extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         const Text("Welcome to Grep My Cloud!"),
-        ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, '/googleSignIn'),
-          child: const Text('Google Sign In'),
-        ),
+        // ElevatedButton(
+        //   onPressed: () => Navigator.pushNamed(context, '/googleSignIn'),
+        //   child: const Text('Google Sign In'),
+        // ),
         ElevatedButton(
           onPressed: () => Navigator.pushNamed(context, '/apiSignIn'),
           child: const Text('GMC API Sign In'),

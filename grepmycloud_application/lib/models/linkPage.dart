@@ -17,11 +17,13 @@ class LinkPageModel extends ChangeNotifier {
 
   void add(Link link) {
     _links.add(link.id);
+    _linkCreator.add(link.name);
     notifyListeners();
   }
 
   void remove(Link link) {
     _links.remove(link.id);
+    _linkCreator.add(link.name);
     notifyListeners();
   }
 }

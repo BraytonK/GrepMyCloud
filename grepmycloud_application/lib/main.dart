@@ -42,7 +42,7 @@ class GrepMyCloud extends StatelessWidget {
           '/bookshelf': (context) =>
               BookshelfPage(), //TODO make this the bookshelf
           '/createLink': (context) => MyCustomForm(),
-          '/googleSignIn': (context) => SignInDemo(),
+          '/googleSignIn': (context) => GoogleSignInPage(),
         },
       ),
     );

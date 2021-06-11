@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:grepmycloud_application/models/linkCreator.dart';
 import 'package:provider/provider.dart';
+import 'package:grepmycloud_application/models/linkCreator.dart';
+import 'package:grepmycloud_application/models/linkPage.dart';
 
 class MyCustomForm extends StatefulWidget {
   @override
@@ -36,16 +39,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
-                content: Text(myController.text),
-              );
-            },
-          );
+          var links = context.read<LinkPageModel>();
+          //TODO change the backend to log this as a link rather than a name
+          links.add(new Link(1, myController.text));
+          Navigator.pushNamed(context, '/myLinks');
         },
         tooltip: 'Show me the value!',
         child: Icon(Icons.text_fields),

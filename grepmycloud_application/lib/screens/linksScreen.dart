@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:grepmycloud_application/models/linkCreator.dart';
+import 'package:grepmycloud_application/models/linkPage.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +57,7 @@ class MyLinksPageState extends State<MyLinksPage> {
 
   @override
   Widget build(BuildContext context) {
+    var pageLinks = context.watch<LinkPageModel>();
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -67,9 +71,8 @@ class MyLinksPageState extends State<MyLinksPage> {
                 childAspectRatio: 4.0),
             delegate: SliverChildBuilderDelegate(
               (context, index) => _MyLink(
-                  'https://docs.google.com/document/d/1lB0U8TbGVYHeC3C3FcF2hzdkBvgaMsT7_yBpm6Lw_Nk/edit?usp=sharing',
-                  'Documentation'),
-              childCount: allObjectCount,
+                  pageLinks.links[index].name, pageLinks.links[index].name),
+              childCount: pageLinks.links.length,
             ),
           ),
         ],
