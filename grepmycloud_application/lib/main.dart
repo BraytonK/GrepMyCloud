@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grepmycloud_application/screens/SignedOutPortalScreen.dart';
 import 'package:grepmycloud_application/screens/bookshelfScreen.dart';
 import 'package:grepmycloud_application/screens/createLinkScreen.dart';
+import 'package:grepmycloud_application/screens/googleSignInScreen.dart';
 import 'package:grepmycloud_application/screens/linksScreen.dart';
-import 'package:grepmycloud_application/screens/welcomeScreen.dart';
+import 'package:grepmycloud_application/screens/apiSignInScreen.dart';
 import 'package:grepmycloud_application/models/linkCreator.dart';
 import 'package:grepmycloud_application/models/linkPage.dart';
 import 'package:provider/provider.dart';
@@ -34,11 +36,13 @@ class GrepMyCloud extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => WelcomePage(), //TODO make this welcome
+          '/': (context) => SignedOutPortal(), //TODO make this welcome
+          '/apiSignIn': (context) => apiSignInPage(),
           '/myLinks': (context) => MyPages(),
           '/bookshelf': (context) =>
               BookshelfPage(), //TODO make this the bookshelf
           '/createLink': (context) => MyCustomForm(),
+          '/googleSignIn': (context) => SignInDemo(),
         },
       ),
     );

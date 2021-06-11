@@ -42,7 +42,7 @@ class _MyAppBar extends StatelessWidget {
       pinned: true,
       expandedHeight: 150.0,
       flexibleSpace: const FlexibleSpaceBar(
-        title: Text('Bookshelf'),
+        title: Text('<User> Bookshelf (Non-Functional)'),
       ),
     );
   }

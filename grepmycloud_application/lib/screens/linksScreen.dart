@@ -12,11 +12,11 @@ class MyPages extends StatelessWidget {
       body: PageView(
         children: [
           MyLinksPage(
-            title: 'Grep My Cloud',
+            title: 'Grep My Cloud (Non-Functional)',
             initialObjectCount: 0,
           ),
           MyLinksPage(
-            title: 'Flutter Refs',
+            title: 'Flutter Refs (Non-Functional)',
             initialObjectCount: 0,
           ),
         ],
