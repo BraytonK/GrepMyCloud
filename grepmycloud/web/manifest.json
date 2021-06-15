@@ -1,11 +1,11 @@
 {
-    "name": "grepmycloud_local",
-    "short_name": "grepmycloud_local",
+    "name": "Grep My Cloud",
+    "short_name": "Grep My Cloud",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A solution for linking your cloud",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.grepmycloud_local">
    <application
-        android:label="grepmycloud_local"
+        android:label="Grep My Cloud"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
