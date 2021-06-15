@@ -27,7 +27,7 @@ class GrepMyCloud extends StatelessWidget {
           create: (context) => PageModel(),
           update: (context, linkList, bookPage) {
             if (bookPage == null) throw ArgumentError.notNull('bookPage');
-            bookPage.linkCreator = linkList;
+            bookPage.linkList = linkList;
             return bookPage;
           },
         ),
