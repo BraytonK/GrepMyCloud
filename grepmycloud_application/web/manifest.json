@@ -1,6 +1,6 @@
 {
-    "name": "grepmycloud_application",
-    "short_name": "grepmycloud_application",
+    "name": "grepmycloud_local",
+    "short_name": "grepmycloud_local",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
