@@ -27,11 +27,11 @@ class GrepMyCloud extends StatelessWidget {
           create: (context) => PageModel(),
           update: (context, linkList, bookPage) {
             if (bookPage == null) throw ArgumentError.notNull('bookPage');
-            bookPage.linkList = linkList;
+            bookPage.linkCreator = linkList;
             return bookPage;
           },
         ),
-        Provider(create: (context) => PageModel()),
+        /** Provider(create: (context) => PageModel()),
         ChangeNotifierProxyProvider<PageModel, BookModel>(
           create: (context) => BookModel(),
           update: (context, pageCreator, book) {
@@ -40,6 +40,7 @@ class GrepMyCloud extends StatelessWidget {
             return book;
           },
         ),
+**/
       ],
       child: MaterialApp(
         title: 'Grep My Cloud',

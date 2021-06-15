@@ -1,4 +1,4 @@
-import 'dart:html';
+/**import 'dart:html';
 
 import 'package:flutter/material.dart';
 
@@ -17,4 +17,4 @@ class User {
 
   @override
   bool operator ==(Object other) => other is User && other.id == id;
-}
+}**/
