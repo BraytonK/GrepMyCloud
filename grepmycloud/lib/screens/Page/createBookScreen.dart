@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grepmycloud/models/link.dart';
+import 'package:grepmycloud/models/book.dart';
 import 'package:provider/provider.dart';
-import 'package:grepmycloud/models/page.dart';
+import 'package:grepmycloud/models/user.dart';
 
 class MyCustomForm extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Link/Item (Non-Functional)'),
+        title: Text('Create Book (Non-Functional)'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -38,10 +38,10 @@ class _MyCustomFormState extends State<MyCustomForm> {
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
         onPressed: () {
-          var links = context.read<PageModel>();
+          var books = context.read<UserModel>();
           //TODO change the backend to log this as a link rather than a name
-          links.add(new Link(1, myController.text), links.getByCurrentId());
-          Navigator.pushNamed(context, '/book');
+          books.add(new Book(1, myController.text), books.getByCurrentId());
+          Navigator.pushNamed(context, '/bookshelf');
         },
         tooltip: 'Show me the value!',
         child: Icon(Icons.text_fields),

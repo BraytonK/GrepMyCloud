@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:grepmycloud/models/user.dart';
+import 'package:provider/provider.dart';
 
 class BookshelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var userBooks = context.watch<UserModel>();
     List<Widget> books = <Widget>[];
     books.add(_MyBook(1));
     books.add(_MyBook(2));
@@ -19,9 +22,20 @@ class BookshelfPage extends StatelessWidget {
             //     crossAxisSpacing: 10.0,
             //     childAspectRatio: 4.0),
             delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) => _MyBook(index)),
+              (BuildContext context, int index) =>
+                  _MyBook(userBooks.books[index].id),
+            ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          var user = context.read<UserModel>();
+          user.setCurrentUserId(0);
+          Navigator.pushNamed(context, '/createBook');
+        },
+        tooltip: 'Book Creator',
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -42,7 +56,7 @@ class _MyAppBar extends StatelessWidget {
       pinned: true,
       expandedHeight: 150.0,
       flexibleSpace: const FlexibleSpaceBar(
-        title: Text('<User> Bookshelf (Non-Functional)'),
+        title: Text('<User> Bookshelf'),
       ),
     );
   }
@@ -51,6 +65,7 @@ class _MyAppBar extends StatelessWidget {
 class _MyShelfOld extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var userBooks = context.watch<UserModel>();
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -58,8 +73,9 @@ class _MyShelfOld extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
-                  (context, index) => _MyBook(index),
-                  childCount: 20),
+                (context, index) => _MyBook(userBooks.books[index].id),
+                childCount: userBooks.books.length,
+              ),
             ),
           ),
           SliverToBoxAdapter(

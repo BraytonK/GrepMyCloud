@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:grepmycloud/models/link.dart';
 import 'package:grepmycloud/models/page.dart';
+import 'package:grepmycloud/models/book.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
@@ -11,17 +12,15 @@ import 'package:provider/provider.dart';
 class MyPages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var books = context.watch<BookModel>();
     return Scaffold(
       body: PageView(
-        children: [
-          MyLinksPage(
-            title: 'Grep My Cloud (Non-Functional)',
-            initialObjectCount: 0,
-          ),
-          MyLinksPage(
-            title: 'Flutter Refs (Non-Functional)',
-            initialObjectCount: 0,
-          ),
+        children: <Widget>[
+          for (int i = 0; i < books.getLength(books.getById(0)); i++)
+            MyLinksPage(
+              title: books.getById(i).name,
+              initialObjectCount: 0,
+            ),
         ],
       ),
     );
@@ -78,7 +77,12 @@ class MyLinksPageState extends State<MyLinksPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/createLink'),
+        onPressed: () {
+          var page = context.read<PageModel>();
+          //TODO make this non static
+          page.setCurrentPageId(0);
+          Navigator.pushNamed(context, '/createLink');
+        },
         tooltip: 'Object Creator',
         child: const Icon(Icons.add),
       ),

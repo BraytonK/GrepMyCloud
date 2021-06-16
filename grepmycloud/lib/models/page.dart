@@ -6,7 +6,8 @@ class PageModel extends ChangeNotifier {
   late LinkModel _linkList;
   final List<int> _links = [];
   static List<String> pageNames = <String>[];
-
+  static List<int> pageIds = <int>[];
+  int currentPageId = 0;
   LinkModel get linkList => _linkList;
 
   set linkList(LinkModel newLinkList) {
@@ -22,6 +23,10 @@ class PageModel extends ChangeNotifier {
     return getById(position);
   }
 
+  BookPage getByCurrentId() {
+    return getById(currentPageId);
+  }
+
   void addPageName(String name) {
     pageNames.add(name);
   }
@@ -30,14 +35,18 @@ class PageModel extends ChangeNotifier {
     pageNames.remove(name);
   }
 
-  void add(Link link) {
-    _links.add(link.id);
+  void setCurrentPageId(int pageId) {
+    currentPageId = pageId;
+  }
+
+  void add(Link link, BookPage page) {
+    page.add(link.id);
     _linkList.add(link.name);
     notifyListeners();
   }
 
-  void remove(Link link) {
-    _links.remove(link.id);
+  void remove(Link link, BookPage page) {
+    page.remove(link.id);
     _linkList.remove(link.name);
     notifyListeners();
   }
@@ -51,6 +60,8 @@ class BookPage {
 
   final Color color;
 
+  final List<int> linkIds = <int>[];
+
   BookPage(this.id, this.name)
       : color = Colors.primaries[id % Colors.primaries.length];
 
@@ -59,4 +70,12 @@ class BookPage {
 
   @override
   bool operator ==(Object other) => other is BookPage && other.id == id;
+
+  void add(int id) {
+    linkIds.add(id);
+  }
+
+  void remove(int id) {
+    linkIds.remove(id);
+  }
 }
