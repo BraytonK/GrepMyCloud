@@ -8,6 +8,7 @@ import 'package:grepmycloud/screens/User/apiSignInScreen.dart';
 import 'package:grepmycloud/models/link.dart';
 import 'package:grepmycloud/models/page.dart';
 import 'package:grepmycloud/models/book.dart';
+import 'package:grepmycloud/models/user.dart';
 
 import 'package:provider/provider.dart';
 
@@ -31,16 +32,23 @@ class GrepMyCloud extends StatelessWidget {
             return bookPage;
           },
         ),
-        /** Provider(create: (context) => PageModel()),
+        Provider(create: (context) => PageModel()),
         ChangeNotifierProxyProvider<PageModel, BookModel>(
           create: (context) => BookModel(),
-          update: (context, pageCreator, book) {
+          update: (context, pageList, book) {
             if (book == null) throw ArgumentError.notNull('book');
-            book.pageCreator = pageCreator;
+            book.pageList = pageList;
             return book;
           },
         ),
-**/
+        Provider(create: (context) => BookModel()),
+        ChangeNotifierProxyProvider<BookModel, UserModel>(
+            create: (context) => UserModel(),
+            update: (context, bookList, user) {
+              if (user == null) throw ArgumentError.notNull('user');
+              user.bookList = bookList;
+              return user;
+            })
       ],
       child: MaterialApp(
         title: 'Grep My Cloud',
