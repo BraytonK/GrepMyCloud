@@ -1,15 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grepmycloud/models/user.dart';
+import 'package:grepmycloud/models/book.dart';
 import 'package:provider/provider.dart';
 
 class BookshelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var userBooks = context.watch<UserModel>();
-    List<Widget> books = <Widget>[];
-    books.add(_MyBook(1));
-    books.add(_MyBook(2));
+    //List<Widget> books = <Widget>[];
+    //books.add(_MyBook(1));
+    //books.add(_MyBook(2));
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -66,6 +67,7 @@ class _MyShelfOld extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var userBooks = context.watch<UserModel>();
+    userBooks.add(new Book(1, "user book"), userBooks.getByCurrentId());
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
