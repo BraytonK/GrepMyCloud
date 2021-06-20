@@ -1,71 +1,28 @@
+//A user contains a list of books
 import 'package:flutter/material.dart';
-import 'package:grepmycloud/models/book.dart';
 
-class UserModel extends ChangeNotifier {
-  late BookModel _bookList;
-  final List<int> _books = [];
-  static List<String> userNames = <String>[];
-  int currentUserId = 0;
-
-  BookModel get bookList => _bookList;
-
-  set bookList(BookModel newBookList) {
-    _bookList = newBookList;
-    notifyListeners();
-  }
-
-  List<Book> get books => _books.map((id) => _bookList.getById(id)).toList();
-
-  User getById(int id) => User(id, userNames[id % userNames.length]);
-
-  void addUserName(String name) {
-    userNames.add(name);
-  }
-
-  void removeUserName(String name) {
-    userNames.remove(name);
-  }
-
-  User getByCurrentId() {
-    return getById(currentUserId);
-  }
-
-  void setCurrentUserId(int id) {
-    currentUserId = id;
-  }
-
-  void add(Book book, User user) {
-    user.add(book.id);
-    //_bookList.add(book.name);
-    notifyListeners();
-  }
-
-  void remove(Book book, User user) {
-    user.remove(book.id);
-    //_bookList.remove(book.name);
-    notifyListeners();
-  }
-}
-
+@immutable
 class User {
-  final int id;
-  final List<int> bookIds = <int>[];
   final String name;
+  final int id;
   final Color color;
+
+  List<int> bookIds = [];
 
   User(this.id, this.name)
       : color = Colors.primaries[id % Colors.primaries.length];
+
   @override
   int get hashCode => id;
 
   @override
   bool operator ==(Object other) => other is User && other.id == id;
 
-  void add(int id) {
+  void addBook(int id) {
     bookIds.add(id);
   }
 
-  void remove(int id) {
+  void removeBook(int id) {
     bookIds.remove(id);
   }
 }

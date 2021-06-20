@@ -43,7 +43,7 @@ dev_dependencies:
 
 flutter_icons:
   ios: true 
-  image_path: "lib/assets/IMG_0113.png"
+  image_path: "lib/assets/IMG_0117.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
