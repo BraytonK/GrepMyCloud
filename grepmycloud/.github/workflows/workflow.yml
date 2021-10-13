@@ -29,9 +29,9 @@ runs-on: ubuntu-latest
       run: |
         cd example/build/web
         git init
-        git config user.name  "Brayton Kerekffy"
+        git config user.name  "Brayton Kerekffy Mac Auto"
         git config user.email "brayton.k14@gmail.com"
-        git remote add secure-origin https://${{ secrets.ACCESS_TOKEN }}@github.com/[BraytonK]/[GrepMyCloud].git
+        git remote add secure-origin https://${{ secrets.ACCESS_TOKEN }}@github.com/BraytonK/GrepMyCloud.git
         git checkout -b gh-pages
         git add .
         git commit -m "Updated docs"
