@@ -43,7 +43,7 @@ class BookModel extends ChangeNotifier {
 
   void add(BookPage bookPage, Book book) {
     book.add(bookPage.id);
-    _pageList.add(bookPage, book);
+    //_pageList.add(bookPage, book);
     bookNames.add(book.name);
     //_pages.add(bookPage.id);
     //_pageList.add(bookPage.name);

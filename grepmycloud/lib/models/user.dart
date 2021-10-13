@@ -1,4 +1,4 @@
-//A user contains a list of books
+// A user is a list of books
 import 'package:flutter/material.dart';
 
 @immutable

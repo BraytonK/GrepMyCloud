@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grepmycloud/models/book.dart';
+import 'package:grepmycloud/models/bookModel.dart';
 import 'package:provider/provider.dart';
-import 'package:grepmycloud/models/user.dart';
+import 'package:grepmycloud/models/userModel.dart';
 
 class MyCustomForm extends StatefulWidget {
   @override

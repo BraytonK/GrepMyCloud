@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:grepmycloud/models/link.dart';
-import 'package:grepmycloud/models/page.dart';
-import 'package:grepmycloud/models/book.dart';
+import 'package:grepmycloud/models/linkModel.dart';
+import 'package:grepmycloud/models/pageModel.dart';
+import 'package:grepmycloud/models/bookModel.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/link.dart';
@@ -15,17 +15,17 @@ class MyPages extends StatelessWidget {
     var books = context.watch<BookModel>();
     return Scaffold(
       body: PageView(
-        children: <Widget>[
-          for (int i = 0; i < books.getLength(books.getById(0)); i++)
-            MyLinksPage(
-              title: books.getById(i).name,
-              initialObjectCount: 0,
-            ),
-        ],
+        children: <Widget>[MyLinksPage(title: 'test', initialObjectCount: 0)],
       ),
     );
   }
 }
+//   for (int i = 0; i < books.getLength(books.getById(0)); i++)
+//     MyLinksPage(
+//       title: books.getById(i).name,
+//       initialObjectCount: 0,
+//     ),
+// ],
 
 class MyLinksPage extends StatefulWidget {
   MyLinksPage({Key? key, required this.title, required this.initialObjectCount})
@@ -54,6 +54,8 @@ class MyLinksPageState extends State<MyLinksPage> {
     return allObjectCount;
   }
 
+  // I believe what I did here is try to make a widget that generates a page with
+  // pre existing links
   @override
   Widget build(BuildContext context) {
     var pageLinks = context.watch<PageModel>();
@@ -62,6 +64,9 @@ class MyLinksPageState extends State<MyLinksPage> {
         slivers: [
           _MyAppBar('$title'),
           const SliverToBoxAdapter(child: SizedBox(height: 12)),
+          // This creates a grid of link widgets that are alled on by iterating
+          // through the 'page links' list which should contain all of the
+          // previously constructed links for that page
           SliverGrid(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0,
@@ -108,6 +113,8 @@ class _MyLink extends StatelessWidget {
   final String title;
   const _MyLink(this.link, this.title, {Key? key}) : super(key: key);
 
+  // This is the actual link object, This is called on in the previous method to
+  // construct links on th epage
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[

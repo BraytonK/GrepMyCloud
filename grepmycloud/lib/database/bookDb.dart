@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grepmycloud/models/book.dart';
 
 class BookDb extends ChangeNotifier {
   //This is representetive of the backend list of all users
@@ -14,5 +15,5 @@ class BookDb extends ChangeNotifier {
   }
 
   //Gets the user by their id
-  User getById(int id) => User(id, _books[id % _books.length]);
+  Book getById(int id) => Book(id, _books[id % _books.length]);
 }

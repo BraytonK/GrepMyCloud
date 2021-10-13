@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grepmycloud/models/link.dart';
+import 'package:grepmycloud/models/linkModel.dart';
 import 'package:provider/provider.dart';
-import 'package:grepmycloud/models/page.dart';
+import 'package:grepmycloud/models/pageModel.dart';
 
 class MyCustomForm extends StatefulWidget {
   @override

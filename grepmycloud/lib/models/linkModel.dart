@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 class LinkModel {
-  static List<String> linkNames = <String>[];
+  static List<String> allLinkNames = <String>[];
+  static List<Link> allLinks = <Link>[];
 
-  Link getById(int id) => Link(id, linkNames[id % linkNames.length]);
+  Link getById(int id) => Link(id, allLinkNames[id % allLinkNames.length]);
 
   Link getByPostition(int position) {
     return getById(position);
   }
 
   void add(String name) {
-    linkNames.add(name);
+    allLinkNames.add(name);
   }
 
   void remove(String name) {
-    linkNames.remove(name);
+    allLinkNames.remove(name);
   }
 }
 

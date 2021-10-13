@@ -9,9 +9,14 @@ class Bookshelf extends ChangeNotifier {
   //   therefore they give all the data in the database
   late UserDb _users;
   late BookDb _books;
+  late User _currentUser;
 
   UserDb get users => _users;
   BookDb get books => _books;
+
+  Bookshelf() {
+    _currentUser = _users.getById(1);
+  }
 
   set users(UserDb newUserDb) {
     _users = newUserDb;
@@ -24,10 +29,10 @@ class Bookshelf extends ChangeNotifier {
   }
 
   // Var used to store the current user
-  late User _currentUser;
+//  late User _currentUser;
 
   // TODO Hard setting the current user
-  _currentUser = users.getById(1);
+  //TODO watch this, this may break it
 
   // The current users books
   final List<int> _bookIds = [];

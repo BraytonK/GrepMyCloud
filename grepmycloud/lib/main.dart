@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:grepmycloud/models/bookshelf.dart';
 import 'package:grepmycloud/screens/User/SignedOutPortalScreen.dart';
 import 'package:grepmycloud/screens/Book/bookshelfScreen.dart';
 import 'package:grepmycloud/screens/Page/createLinkScreen.dart';
 import 'package:grepmycloud/screens/User/googleSignInScreen.dart';
 import 'package:grepmycloud/screens/Page/bookScreen.dart';
 import 'package:grepmycloud/screens/User/apiSignInScreen.dart';
-import 'package:grepmycloud/models/link.dart';
-import 'package:grepmycloud/models/page.dart';
-import 'package:grepmycloud/models/book.dart';
-import 'package:grepmycloud/models/user.dart';
+import 'package:grepmycloud/models/linkModel.dart';
+import 'package:grepmycloud/models/pageModel.dart';
+import 'package:grepmycloud/models/bookModel.dart';
+import 'package:grepmycloud/models/userModel.dart';
 
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,15 @@ class GrepMyCloud extends StatelessWidget {
               if (user == null) throw ArgumentError.notNull('user');
               user.bookList = bookList;
               return user;
-            })
+            }),
+        // Provider(create: (context) => Bookshelf()),
+        // ChangeNotifierProxyProvider<Bookshelf, UserModel>(
+        //    create: (context) => UserModel(),
+        //   update: (context, bookList, user) {
+        //       if (user == null) throw ArgumentError.notNull('user');
+        //      user.bookshelf = bookshelf;
+        //     return user;
+        //  })
       ],
       child: MaterialApp(
         title: 'Grep My Cloud',
@@ -59,7 +68,7 @@ class GrepMyCloud extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => APISignInPage(), //TODO make this welcome
+          '/': (context) => MyPages(), //TODO make this welcome
           '/apiSignIn': (context) => APISignInPage(),
           '/book': (context) => MyPages(),
           '/bookshelf': (context) =>
