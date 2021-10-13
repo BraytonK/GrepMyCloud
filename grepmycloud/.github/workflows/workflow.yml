@@ -29,8 +29,8 @@ runs-on: ubuntu-latest
       run: |
         cd example/build/web
         git init
-        git config user.name  "CI"
-        git config user.email "flutter-ci@github.com"
+        git config user.name  "Brayton Kerekffy"
+        git config user.email "brayton.k14@gmail.com"
         git remote add secure-origin https://${{ secrets.ACCESS_TOKEN }}@github.com/[BraytonK]/[GrepMyCloud].git
         git checkout -b gh-pages
         git add .
